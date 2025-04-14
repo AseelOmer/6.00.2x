@@ -1,0 +1,15 @@
+def brute_force_cow_transport(cows, limit):
+    best_partition = None
+
+    for partition in get_partitions(list(cows.keys())):
+        valid = True
+        for trip in partition:
+            total_weight = sum(cows[cow] for cow in trip)
+            if total_weight > limit:
+                valid = False
+                break
+        if valid:
+            if (best_partition is None) or (len(partition) < len(best_partition)):
+                best_partition = partition
+
+    return best_partition
